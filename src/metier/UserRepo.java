@@ -46,7 +46,7 @@ public class UserRepo {
             ResultSet rs = stmt.executeQuery("select * from user");
 
             while (rs.next()){
-                users.add(new User(rs.getString("email"), rs.getString("password"), rs.getString("nom"), rs.getString("prenom"), rs.getString("numtel"), rs.getString("user_role"), rs.getBoolean("autorized")));
+                users.add(new User(rs.getInt("id") ,rs.getString("email"), rs.getString("password"), rs.getString("nom"), rs.getString("prenom"), rs.getString("numtel"), rs.getString("user_role"), rs.getBoolean("autorized")));
             }
             return users;
         } catch (Exception e) {
@@ -101,7 +101,7 @@ public class UserRepo {
             ResultSet rs = stmt.executeQuery("select * from user where email = '"+email+"'");
 
             while (rs.next()){
-                user = new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"), rs.getString("nom"), rs.getString("prenom"), rs.getString("numtel"), rs.getString("user_role"), rs.getBoolean("autorized"));
+                user = new User(rs.getInt("id"), rs.getString("email"), Crypt.decrypt(rs.getString("password")) , rs.getString("nom"), rs.getString("prenom"), rs.getString("numtel"), rs.getString("user_role"), rs.getBoolean("autorized"));
             }
             return user;
         } catch (Exception e) {

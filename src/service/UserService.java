@@ -1,6 +1,8 @@
 package service;
 import javax.jws.*;
 import java.util.*;
+
+import metier.Crypt;
 import metier.UserRepo;
 import model.User;
 
@@ -29,7 +31,7 @@ public class UserService {
 
     @WebMethod(operationName = "update")
     public int updateUser(@WebParam(name = "id") String id, @WebParam(name = "email") String email, @WebParam(name = "password") String password, @WebParam(name = "nom") String nom, @WebParam(name = "prenom") String prenom, @WebParam(name = "telnum") String telnum, @WebParam(name = "user_role") String user_role){
-        return userRepo.updateUser(id, email, password, nom, prenom, telnum, user_role);
+        return userRepo.updateUser(id, email, Crypt.crypt(password), nom, prenom, telnum, user_role);
     }
 
     @WebMethod(operationName = "find")
