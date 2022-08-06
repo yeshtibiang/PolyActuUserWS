@@ -18,15 +18,18 @@ public class AuthentificationService {
     }
 
     @WebMethod(operationName = "login")
-    public User login(@WebParam(name = "email") String email, @WebParam(name = "password") String password) {
+    public Boolean login(@WebParam(name = "email") String email, @WebParam(name = "password") String password) {
         
         User user = userRepo.findOneUser(email);
-        System.out.println(user.getPassword());
+        if(user == null)
+                return false ;
+        else 
+            if(Crypt.decrypt(user.getPassword()).equalsIgnoreCase(password)){
+                System.out.println(Crypt.decrypt(user.getPassword()));
+                return true ;}
+            else 
+                return false ;
 
-        if (user != null && Crypt.decrypt(user.getPassword()).equalsIgnoreCase(password)) {
-            return user;
-        }else{
-            return null;
-        }
+        
     }
 }
