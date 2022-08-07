@@ -11,8 +11,8 @@ public class ServeurJWS {
 
         try {
             ip = InetAddress.getLocalHost();
-            String url1 = "http://"+ ip.getHostAddress() + ":8585/";
-            String url2 = "http://"+ ip.getHostAddress() + ":8586/";
+            String url1 = "http://"+ ip.getHostAddress() + ":8585/UserService?wsdl";
+            String url2 = "http://"+ ip.getHostAddress() + ":8586/AuthentificationService?wsdl";
             Endpoint.publish(url1, new UserService());
             Endpoint.publish(url2, new AuthentificationService());
             System.out.println("Service Utilisateur: " +url1);

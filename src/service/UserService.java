@@ -1,4 +1,5 @@
 package service;
+
 import javax.jws.*;
 import java.util.*;
 
@@ -12,9 +13,9 @@ public class UserService {
     UserRepo userRepo = new UserRepo();
 
     @WebMethod(operationName = "inserer")
-    public int addUser(@WebParam(name = "email") String email, @WebParam(name = "password") String password, @WebParam(name = "nom") String nom, @WebParam(name = "prenom") String prenom, @WebParam(name = "telnum") String telnum, @WebParam(name = "user_role") String user_role){
+    public int addUser(@WebParam(name = "email") String email, @WebParam(name = "password") String password, @WebParam(name = "nom") String nom, @WebParam(name = "prenom") String prenom, @WebParam(name = "telnum") String telnum, @WebParam(name = "user_role") String user_role, @WebParam(name = "autorized") Boolean autorized){
 
-        User user = new User(email, password, nom, prenom, telnum, user_role);
+        User user = new User(email, password, nom, prenom, telnum, user_role, autorized);
 
         return userRepo.addUser(user);
     }
